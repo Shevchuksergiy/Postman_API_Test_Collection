@@ -1,0 +1,962 @@
+{
+	"info": {
+		"_postman_id": "5827dfe8-7f64-43e1-b3c8-4f74cfba13e5",
+		"name": "My Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48568869",
+		"_collection_link": "https://derzoldaten-4670874.postman.co/workspace/%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B9-%D0%A8%D0%B5%D0%B2%D1%87%D1%83%D0%BA's-Workspace~6618a267-42ed-48d2-8afa-2c13a872b97f/collection/48568869-5827dfe8-7f64-43e1-b3c8-4f74cfba13e5?action=share&source=collection_link&creator=48568869"
+	},
+	"item": [
+		{
+			"name": "CreateFolder",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Создана папка с ID\", function () {",
+							"    pm.expect(jsonData).to.be.an('array').that.is.not.empty;",
+							"    pm.expect(jsonData[0]).to.have.property('result');",
+							"    pm.expect(jsonData[0].result).to.have.property('data');",
+							"    pm.expect(jsonData[0].result.data).to.have.property('id');",
+							"    pm.expect(jsonData[0].result.data.id).to.be.a('string');",
+							"",
+							"    // Сохраняем id в переменную окружения",
+							"    pm.environment.set('folder_id', jsonData[0].result.data.id);",
+							"",
+							"    pm.test(\"ID папки: \" + jsonData[0].result.data.id, function() {",
+							"        pm.expect(jsonData[0].result.data.id).to.be.a('string');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "{{yard_token}}"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"0\":{\"workspaceId\":\"89497bff-12e2-40cf-a93d-5d21efd9fbad\",\"spaceData\":{\"name\":\"Progress Folder\",\"color\":\"green\",\"accessors\":[]}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.createSpace?batch=1",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.createSpace"
+					],
+					"query": [
+						{
+							"key": "batch",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.createSpace?batch=1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MDc2NjQ3LCJpYXQiOjE3NTkwNzY1ODcsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTA3NjQ2NH1dLCJzZXNzaW9uX2lkIjoiNGE0OWQwMGUtMTM1ZS00OTFmLTk4ZGYtOWJiMWM0OGUzODQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.6R_zWWy2LZAGzbGB5d5c1PB1Cnk_bpTCnqn0PoeJQiQ' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"0\":{\"workspaceId\":\"89497bff-12e2-40cf-a93d-5d21efd9fbad\",\"spaceData\":{\"name\":\"Progress Folder\",\"color\":\"green\",\"accessors\":[]}}}'"
+			},
+			"response": []
+		},
+		{
+			"name": "FolderCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Найденый в ответе ID совпадает с folder_id из окружения \", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const id = jsonData?.result?.data?.[0]?.id;",
+							"    const folderId = pm.environment.get(\"folder_id\");",
+							"    pm.expect(id, \"ID в ответе существует\").to.exist;",
+							"    pm.expect(id, \"ID совпадает с folder_id из окружения\").to.eql(folderId);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "{{yard_token}}"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.getPrincipalSpaces?input=%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.getPrincipalSpaces"
+					],
+					"query": [
+						{
+							"key": "input",
+							"value": "%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.getPrincipalSpaces?input=%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MDc3MTAxLCJpYXQiOjE3NTkwNzcwNDEsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTA3NjQ2NH1dLCJzZXNzaW9uX2lkIjoiNGE0OWQwMGUtMTM1ZS00OTFmLTk4ZGYtOWJiMWM0OGUzODQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.Z9blW0_gEcNPscVWgZZkfeWMce_PPBkSg6kG8oD8fnw' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'"
+			},
+			"response": []
+		},
+		{
+			"name": "SecurityCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Папка не видна другим пользователям\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.within(400, 499);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MjU4ODkyLCJpYXQiOjE3NTkyNTUyOTIsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTI1MTcxM31dLCJzZXNzaW9uX2lkIjoiNDAxMjdjNzYtMzMwMC00NzNmLTllZTAtZGZlY2M0NzJiMTA1IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.xWC1xjsegrRqtf14ge24yOnerkgIt78AMCweMqZecq0",
+						"disabled": true
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.getPrincipalSpaces?input=%7B%22workspaceId%22%3A%22c9e67da8-5ecd-4fee-9eb7-2de45c2dc51c%22%7D",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.getPrincipalSpaces"
+					],
+					"query": [
+						{
+							"key": "input",
+							"value": "%7B%22workspaceId%22%3A%22c9e67da8-5ecd-4fee-9eb7-2de45c2dc51c%22%7D"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.getPrincipalSpaces?input=%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MjU4ODkyLCJpYXQiOjE3NTkyNTUyOTIsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTI1MTcxM31dLCJzZXNzaW9uX2lkIjoiNDAxMjdjNzYtMzMwMC00NzNmLTllZTAtZGZlY2M0NzJiMTA1IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.xWC1xjsegrRqtf14ge24yOnerkgIt78AMCweMqZecq0' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'"
+			},
+			"response": []
+		},
+		{
+			"name": "invite",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Ивайт создан. Добавлена переменная accountId\", function () {",
+							"    var accountId = jsonData[0]?.result?.data?.[0]?.accountId;",
+							"    pm.expect(accountId).to.be.a('string').that.is.not.empty;",
+							"    pm.environment.set('accountId', accountId);",
+							"    pm.expect(pm.environment.get('accountId')).to.eql(accountId);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MDgyNDQyLCJpYXQiOjE3NTkwODIzODIsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTA3NjQ2NH1dLCJzZXNzaW9uX2lkIjoiNGE0OWQwMGUtMTM1ZS00OTFmLTk4ZGYtOWJiMWM0OGUzODQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.HmjsALYITQdbUjJQzylbMfJnTSNpalp6DEnTGFOQIvM"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"0\":{\"spaceId\":\"{{folder_id}}\",\"invites\":[{\"email\":\"{{email}}\",\"role\":\"MEMBER\"}]}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.inviteSpaceMember?batch=1",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.inviteSpaceMember"
+					],
+					"query": [
+						{
+							"key": "batch",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.inviteSpaceMember?batch=1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MDgyNDQyLCJpYXQiOjE3NTkwODIzODIsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTA3NjQ2NH1dLCJzZXNzaW9uX2lkIjoiNGE0OWQwMGUtMTM1ZS00OTFmLTk4ZGYtOWJiMWM0OGUzODQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.HmjsALYITQdbUjJQzylbMfJnTSNpalp6DEnTGFOQIvM' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"0\":{\"spaceId\":\"29063983-3150-4dc4-94b4-850df5384175\",\"invites\":[{\"email\":\"Derzoldaten@gmail.com\",\"role\":\"MEMBER\"}]}}'"
+			},
+			"response": []
+		},
+		{
+			"name": "InviteCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Полученый в ответе folder_id существует и совпадает с переменной окружения folder_id', function () {",
+							"    var jsonData = pm.response.json();",
+							"    var value = _.get(jsonData, 'result.data[0].id');",
+							"    pm.expect(value).to.exist;",
+							"    pm.expect(value).to.eql(pm.environment.get('folder_id'));",
+							"});",
+							"",
+							"pm.test('Полученый в ответе AccountId существует и соответсвует значению переменной окружения accountId', function () {",
+							"    var jsonData = pm.response.json();",
+							"    var value = _.get(jsonData, 'result.data[0].spaceAccesses[1].account.id');",
+							"    pm.expect(value).to.exist;",
+							"    pm.expect(value).to.eql(pm.environment.get('accountId'));",
+							"});",
+							"pm.test('Полученый ответ Email существует и соответствует переменно Email', function () {",
+							"    var jsonData = pm.response.json();",
+							"    var emailValue = _.get(jsonData, 'result.data[0].spaceAccesses[1].account.person.email');",
+							"    pm.expect(emailValue).to.exist;",
+							"    pm.expect(emailValue).to.eql(pm.environment.get('email'));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "{{yard_token}}"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.getPrincipalSpaces?input=%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.getPrincipalSpaces"
+					],
+					"query": [
+						{
+							"key": "input",
+							"value": "%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.getPrincipalSpaces?input=%7B%22workspaceId%22%3A%2289497bff-12e2-40cf-a93d-5d21efd9fbad%22%7D' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MDg3MDQ3LCJpYXQiOjE3NTkwODY5ODcsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTA3NjQ2NH1dLCJzZXNzaW9uX2lkIjoiNGE0OWQwMGUtMTM1ZS00OTFmLTk4ZGYtOWJiMWM0OGUzODQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.IWXgKOPwgXDg3LZ_TvJ736LY6k5dU9X_6LUa3nevzvY' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteInitedUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Приглашённый пользователь удалён из папки\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MjU4ODkyLCJpYXQiOjE3NTkyNTUyOTIsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTI1MTcxM31dLCJzZXNzaW9uX2lkIjoiNDAxMjdjNzYtMzMwMC00NzNmLTllZTAtZGZlY2M0NzJiMTA1IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.xWC1xjsegrRqtf14ge24yOnerkgIt78AMCweMqZecq0",
+						"disabled": true
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"0\":{\"spaceId\":\"{{folder_id}}\",\"accountId\":\"{{accountId}}\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.deleteSpaceAccess?batch=1",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.deleteSpaceAccess"
+					],
+					"query": [
+						{
+							"key": "batch",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.deleteSpaceAccess?batch=1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MjU4ODkyLCJpYXQiOjE3NTkyNTUyOTIsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTI1MTcxM31dLCJzZXNzaW9uX2lkIjoiNDAxMjdjNzYtMzMwMC00NzNmLTllZTAtZGZlY2M0NzJiMTA1IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.xWC1xjsegrRqtf14ge24yOnerkgIt78AMCweMqZecq0' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"0\":{\"spaceId\":\"7fb40675-8412-468a-99d6-1de138aaeae3\",\"accountId\":\"a65db8cf-82cc-4d63-843a-ea473ec64835\"}}'"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteFolder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Проверка успешного удаления папки\r",
+							"pm.test(\"Папка успешно удалена\", function () {\r",
+							"    pm.response.to.have.status(200); // Проверка кода ответа\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{yard_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6"
+					},
+					{
+						"key": "authorization",
+						"value": "{{yard_token}}"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://yard-noty.web.app"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://yard-noty.web.app/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"0\":{\"spaceId\":\"{{folder_id}}\",\"deleteConversations\":true}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.deleteSpace?batch=1",
+					"protocol": "https",
+					"host": [
+						"yard-backend-trpc-bmlvpxpwtq-ey",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"trpc",
+						"spaces.deleteSpace"
+					],
+					"query": [
+						{
+							"key": "batch",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl 'https://yard-backend-trpc-bmlvpxpwtq-ey.a.run.app/trpc/spaces.deleteSpace?batch=1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: ru,uk;q=0.9,ru-RU;q=0.8,en-US;q=0.7,en;q=0.6' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkRlTkJ3MDBSN1JEZUhLZloiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NkcGpkZmNpd21ob2VmaHFhaGd0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJlODdlN2I1Yy0xMGFhLTQ3YjItOGI0YS0zOWM4YjU0MjIyYTciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU5MDg5ODc2LCJpYXQiOjE3NTkwODk4MTYsImVtYWlsIjoieWFyb3NsYXZAbm90eS5haSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZ29vZ2xlIiwicHJvdmlkZXJzIjpbImdvb2dsZSJdfSwidXNlcl9tZXRhZGF0YSI6eyJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwiY3VzdG9tX2NsYWltcyI6eyJoZCI6Im5vdHkuYWkifSwiZW1haWwiOiJ5YXJvc2xhdkBub3R5LmFpIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwibmFtZSI6Illhcm9zbGF2IFBpZGR1Ym55IiwicGhvbmVfdmVyaWZpZWQiOmZhbHNlLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05tajdUNnlEeEQ4YkM0MWdHRWx1ZFFOU1ZGTmxuYWlhTXNTblpTQjhNWU1VWDFRPXM5Ni1jIiwicHJvdmlkZXJfaWQiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDciLCJzdWIiOiIxMDIzODg3ODM2ODM3NDQ3OTMzNDcifSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJvYXV0aCIsInRpbWVzdGFtcCI6MTc1OTA3NjQ2NH1dLCJzZXNzaW9uX2lkIjoiNGE0OWQwMGUtMTM1ZS00OTFmLTk4ZGYtOWJiMWM0OGUzODQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.pX2v6yNMxZ9cmlLVoyA9KMRG1O98FHLD722l_gQXqrU' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://yard-noty.web.app' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://yard-noty.web.app/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: cross-site' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"0\":{\"spaceId\":\"670b9c3a-488b-40ae-841c-19c7072b5bdc\",\"deleteConversations\":true}}'"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{yard_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
